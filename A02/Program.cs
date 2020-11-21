@@ -10,6 +10,7 @@ namespace A02
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Assignment No- 02")
         }
     }
 }
