@@ -16,36 +16,61 @@ namespace A02
         }
     }
 
-    public class Student : Info{
-        public Student(string title) : base(title) {
+    public abstract class Deliverable : Info
+    {
+        private int _totalMarks { get; set; }
+        public int totalMarks => _totalMarks;
+
+        private int _obtainedMarks { get; set; }
+        public int obtainedMarks => _obtainedMarks;
+
+        public Deliverable(string title, int totalMarks, int marksObtained) : base(title) {
+            _totalMarks = totalMarks;
+            _obtainedMarks = marksObtained;
+        }
+    }
+
+    public class StudentInfo : Info{
+        private String _name { get; set; }
+        public String Name => _name;
+        
+        private Group _group { get; set; }
+        public Group group => _group;
+
+        private List<Exam> Deliverables { get; set; }
+
+        public StudentInfo(string name, Group group) : base(name) {
+            _name = name;
+            _group = group;
         }
     
     }
 
     public class Group : Info{
+
         public Group(string title) : base(title) {
         }
     }
 
 
-    public class Assignment : Info
+    public class Assignment : Deliverable
     {
         public Assignment(string title) : base(title) { }
         
     }
-    public class Quiz : Info
+    public class Quiz : Deliverable
     {
         public Quiz(string title) : base(title) { }
     }
-    public class Sessional : Info
+    public class Sessional : Deliverable
     {
         public Sessional(string title) : base(title) { }
     }
-    public class Final : Info
+    public class Final : Deliverable
     {
         public Final(string title) : base(title) { }
     }
-    public class Other : Info
+    public class Other : Deliverable
     {
         public Other(string title) : base(title) { }
     }
@@ -71,26 +96,53 @@ namespace A02
         public ExamFactory(string title) : base(title) { }
         public override void Create()
         {
-            Tests.Add(new Student("Muhammad Talha Bin Mansoor"));
-            Tests.Add(new Group("Group-1"));
-            Tests.Add(new Assignment("Assignment - 1"));
-            Tests.Add(new Assignment("Assignment - 2"));
-            Tests.Add(new Assignment("Assignment - 3"));
-            Tests.Add(new Assignment("Assignment - 4"));
-            Tests.Add(new Quiz("Quiz - 1"));
-            Tests.Add(new Quiz("Quiz - 2"));
-            Tests.Add(new Quiz("Quiz - 3"));
-            Tests.Add(new Quiz("Quiz - 4"));
-            Tests.Add(new Sessional("Sessional - 1"));
-            Tests.Add(new Sessional("Sessional - 2"));
-            Tests.Add(new Final("Fianl Term"));
-            Tests.Add(new Other("Other type"));
+            base.Tests.Add(new Assignment("Assignment - 1"));
+            base.Tests.Add(new Assignment("Assignment - 2"));
+            base.Tests.Add(new Assignment("Assignment - 3"));
+            base.Tests.Add(new Assignment("Assignment - 4"));
+            base.Tests.Add(new Quiz("Quiz - 1"));
+            base.Tests.Add(new Quiz("Quiz - 2"));
+            base.Tests.Add(new Quiz("Quiz - 3"));
+            base.Tests.Add(new Quiz("Quiz - 4"));
+            base.Tests.Add(new Sessional("Sessional - 1"));
+            base.Tests.Add(new Sessional("Sessional - 2"));
+            base.Tests.Add(new Final("Fianl Term"));
+            base.Tests.Add(new Other("Other type"));
         }
     }
 
 
+    public abstract class Student
+    {
+        private StudentInfo _studentInfo { get; set; }
+        public StudentInfo StudentInfo => _studentInfo;
+
+        private List<StudentInfo> _students { get; set; }
+        public List<StudentInfo> Students => _students;
+
+        public Student(StudentInfo studentInfo)
+        {
+            _studentInfo = studentInfo;
+            this.Create();
+        }
+
+        public abstract void Create();
+    }
+
+    public class StudentFactory : Student
+    {
+        private StudentInfo _studentInfo { get; set; }
 
 
+        public StudentFactory(StudentInfo studentInfo) : base(studentInfo) {
+            _studentInfo = studentInfo;
+            this.Create();
+        }
+        public override void Create()
+        {
+            base.Students.Add(_studentInfo);
+        }
+    }
 
 
 
@@ -100,91 +152,6 @@ namespace A02
         {
             Console.WriteLine("Assignment No- 02");
 
-            
-
-            int atr = 1;
-
-            while (atr != 0) {
-                Console.WriteLine(" Enter 1 to add student \n Enter 2 to add data of student \n Enter 3 for see all students \n Enter 4 to exit");
-
-                int option = Convert.ToInt32(Console.ReadLine());
-
-                switch (option)
-                {
-                    case 1:
-                        Console.WriteLine("Data Entry");
-
-                        Console.WriteLine("Enter Student ID");
-                        string stdID = Console.ReadLine();
-                        Console.WriteLine("Do you want to enter assignment Marks... (y/n)");
-                        string check = Console.ReadLine();
-                        if(check == "y")
-                        {
-                            Console.WriteLine("Enter title");
-                            string asign = Console.ReadLine();
-                            Console.WriteLine("Enter Obtained marks");
-                            string asignObtn = Console.ReadLine();
-                            Console.WriteLine("Enter Total  marks");
-                            string asignTot = Console.ReadLine();
-                        }
-
-                        Console.WriteLine("Do you want to enter Quiz Marks... (y/n)");
-                        string qcheck = Console.ReadLine();
-                        if (qcheck == "y")
-                        {
-                            Console.WriteLine("Enter title");
-                            string asign = Console.ReadLine();
-                            Console.WriteLine("Enter Obtained marks");
-                            string asignObtn = Console.ReadLine();
-                            Console.WriteLine("Enter Total  marks");
-                            string asignTot = Console.ReadLine();
-                        }
-
-                        Console.WriteLine("Do you want to enter Sessional Marks... (y/n)");
-                        string scheck = Console.ReadLine();
-                        if (scheck == "y")
-                        {
-                            Console.WriteLine("Enter title");
-                            string asign = Console.ReadLine();
-                            Console.WriteLine("Enter Obtained marks");
-                            string asignObtn = Console.ReadLine();
-                            Console.WriteLine("Enter Total  marks");
-                            string asignTot = Console.ReadLine();
-                        }
-
-                        Console.WriteLine("Do you want to enter final Marks... (y/n)");
-                        string fcheck = Console.ReadLine();
-                        if (fcheck == "y")
-                        {
-                            Console.WriteLine("Enter title");
-                            string asign = Console.ReadLine();
-                            Console.WriteLine("Enter Obtained marks");
-                            string asignObtn = Console.ReadLine();
-                            Console.WriteLine("Enter Total  marks");
-                            string asignTot = Console.ReadLine();
-                        }
-                        break;
-
-                    case 2:
-                        Console.WriteLine("Enter Student Id");
-                        break;
-
-                    case 3:
-                        break;
-
-                    default:
-
-                        break;
-
-
-                }
-
-
-
-            }
-            
-
-
             List <ExamFactory> exams = new List<ExamFactory>()
             {
                 new ExamFactory("Fall 2020"),
@@ -193,6 +160,18 @@ namespace A02
                 new ExamFactory("Spring 2022"),
             
             };
+
+            List<StudentFactory> students = new List<StudentFactory>()
+            {
+                new StudentFactory(new StudentInfo("Student A", new Group("Group 1"))),
+                new StudentFactory(new StudentInfo("Student B", new Group("Group 2"))),
+                new StudentFactory(new StudentInfo("Student C", new Group("Group 2"))),
+                new StudentFactory(new StudentInfo("Student D", new Group("Group 1"))),
+                new StudentFactory(new StudentInfo("Student E", new Group("Group 2"))),
+                new StudentFactory(new StudentInfo("Student F", new Group("Group 1"))),
+                new StudentFactory(new StudentInfo("Student G", new Group("Group 1"))),
+            };
+
             var index =1;
             foreach (var exam in exams)
             {
