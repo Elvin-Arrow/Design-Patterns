@@ -55,24 +55,24 @@ namespace A02
 
     public class Assignment : Deliverable
     {
-        public Assignment(string title) : base(title) { }
+        public Assignment(string title, int total, int obtained) : base(title, total, obtained) { }
         
     }
     public class Quiz : Deliverable
     {
-        public Quiz(string title) : base(title) { }
+        public Quiz(string title, int total, int obtained) : base(title, total, obtained) { }
     }
     public class Sessional : Deliverable
     {
-        public Sessional(string title) : base(title) { }
+        public Sessional(string title, int total, int obtained) : base(title, total, obtained) { }
     }
     public class Final : Deliverable
     {
-        public Final(string title) : base(title) { }
+        public Final(string title, int total, int obtained) : base(title, total, obtained) { }
     }
     public class Other : Deliverable
     {
-        public Other(string title) : base(title) { }
+        public Other(string title, int total, int obtained) : base(title, total, obtained) { }
     }
 
     public abstract class Exam
@@ -96,18 +96,18 @@ namespace A02
         public ExamFactory(string title) : base(title) { }
         public override void Create()
         {
-            base.Tests.Add(new Assignment("Assignment - 1"));
-            base.Tests.Add(new Assignment("Assignment - 2"));
-            base.Tests.Add(new Assignment("Assignment - 3"));
-            base.Tests.Add(new Assignment("Assignment - 4"));
-            base.Tests.Add(new Quiz("Quiz - 1"));
-            base.Tests.Add(new Quiz("Quiz - 2"));
-            base.Tests.Add(new Quiz("Quiz - 3"));
-            base.Tests.Add(new Quiz("Quiz - 4"));
-            base.Tests.Add(new Sessional("Sessional - 1"));
-            base.Tests.Add(new Sessional("Sessional - 2"));
-            base.Tests.Add(new Final("Fianl Term"));
-            base.Tests.Add(new Other("Other type"));
+            base.Tests.Add(new Assignment("Assignment - 1", 10, -1));
+            base.Tests.Add(new Assignment("Assignment - 2", 10, -1));
+            base.Tests.Add(new Assignment("Assignment - 3", 10, -1));
+            base.Tests.Add(new Assignment("Assignment - 4", 10, -1));
+            base.Tests.Add(new Quiz("Quiz - 1", 10, -1));
+            base.Tests.Add(new Quiz("Quiz - 2", 10, -1));
+            base.Tests.Add(new Quiz("Quiz - 3", 10, -1));
+            base.Tests.Add(new Quiz("Quiz - 4", 10, -1));
+            base.Tests.Add(new Sessional("Sessional - 1", 10, -1));
+            base.Tests.Add(new Sessional("Sessional - 2", 15, -1));
+            base.Tests.Add(new Final("Fianl Term", 50, -1));
+            base.Tests.Add(new Other("Other type", 10, -1));
         }
     }
 
