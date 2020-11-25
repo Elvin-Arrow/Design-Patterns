@@ -67,6 +67,32 @@ namespace A02
             return "No stats";    
         }
     }
+
+    public class Student : Learners {
+
+    }
+
+    public class Group : Learners {
+
+    }
+
+    public abstract class AbstractFactory {
+
+    }
+
+    public class LearnerFactory : AbstractFactory {
+
+    }
+
+    public class DeliverableFactory : AbstractFactory {
+
+    }
+
+    public class FactoryProducer {
+        public static AbstractFactory getFactory() {}
+    }
+
+
     //public abstract class Info
     //{
     //    private string _Title { get; set; }
